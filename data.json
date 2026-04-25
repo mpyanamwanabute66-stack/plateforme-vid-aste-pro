@@ -1,14 +1,18 @@
 [
   {
     "titre": "Montage vidéo",
-    "description": "Service professionnel de montage vidéo"
+    "description": "Service professionnel de montage"
   },
   {
     "titre": "Tournage caméra",
-    "description": "Service de vidéaste sur terrain"
+    "description": "Captation vidéo sur terrain"
   },
   {
     "titre": "Édition rapide",
-    "description": "Montage rapide pour réseaux sociaux"
+    "description": "Montage pour réseaux sociaux"
+  },
+  {
+    "titre": "Color grading",
+    "description": "Style cinéma professionnel"
   }
 ]
