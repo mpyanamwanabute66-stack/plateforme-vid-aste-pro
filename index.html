@@ -8,7 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins;
+}
 
 body{
   background: radial-gradient(circle at top, #0f172a, #020617);
@@ -30,22 +35,6 @@ header{
 header h1{
   color:#38bdf8;
   font-size:20px;
-}
-
-/* BUTTON */
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  background:linear-gradient(135deg,#38bdf8,#6366f1);
-  color:white;
-  transition:0.3s;
-}
-
-button:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 15px #38bdf8;
 }
 
 /* HERO */
@@ -84,6 +73,23 @@ button:hover{
 .card:hover{
   transform:translateY(-5px);
   background:rgba(56,189,248,0.1);
+  box-shadow:0 0 15px rgba(56,189,248,0.3);
+}
+
+/* BUTTON */
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#38bdf8,#6366f1);
+  color:white;
+  margin-top:10px;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
 }
 </style>
 </head>
@@ -92,7 +98,6 @@ button:hover{
 
 <header>
 <h1>🎬 Vidéaste Pro+</h1>
-<button onclick="alert('Menu bientôt disponible')">Menu</button>
 </header>
 
 <section class="hero">
@@ -105,7 +110,6 @@ button:hover{
 <script>
 const grid = document.getElementById("grid");
 
-/* Charger JSON */
 fetch("./data.json")
 .then(res => res.json())
 .then(data => {
@@ -118,7 +122,7 @@ fetch("./data.json")
       <p style="color:#94a3b8;font-size:13px;margin-top:8px;">
         ${item.description}
       </p>
-      <button style="margin-top:10px;" onclick="alert('Ouvert')">
+      <button onclick="alert('Ouverture du service')">
         Voir
       </button>
     `;
