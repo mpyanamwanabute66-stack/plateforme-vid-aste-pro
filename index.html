@@ -2,75 +2,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vidéaste Pro+</title>
+<title>Vidéaste Pro+ Firebase</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--accent:#38bdf8;--text:#e2e8f0}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text)}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px;background:#020617;position:sticky;top:0}
-header h1{color:var(--accent)}
-nav button{margin-left:10px;padding:10px 15px;border:none;border-radius:8px;background:var(--accent);color:#000;cursor:pointer}
-.hero{padding:60px;text-align:center;background:linear-gradient(135deg,#020617,#1e293b)}
-.hero h2{font-size:2rem;margin-bottom:10px}
-section{padding:40px}
-h2{color:var(--accent);margin-bottom:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
-.card{background:var(--card);padding:20px;border-radius:15px;transition:.3s}
-.card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,.5)}
-footer{text-align:center;padding:20px;background:#020617}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);justify-content:center;align-items:center}
-.modal-content{background:#1e293b;padding:30px;border-radius:10px;width:300px}
-.modal input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:5px}
-.modal button{width:100%;padding:10px;background:var(--accent);border:none;border-radius:5px}
+body{font-family:Poppins;background:#0f172a;color:#fff;margin:0}
+header{display:flex;justify-content:space-between;padding:20px;background:#020617}
+button{padding:10px;border:none;border-radius:8px;background:#38bdf8;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;padding:20px}
+.card{background:#1e293b;padding:20px;border-radius:10px}
+.modal{display:none;position:fixed;width:100%;height:100%;background:rgba(0,0,0,.7);justify-content:center;align-items:center}
+.modal-content{background:#1e293b;padding:20px;border-radius:10px}
+.modal input{display:block;margin:10px 0;padding:10px;width:100%}
 </style>
 </head>
 <body>
 <header>
 <h1>Vidéaste Pro+</h1>
-<nav>
+<div>
 <button onclick="openModal('login')">Connexion</button>
 <button onclick="openModal('register')">Créer compte</button>
-</nav>
-</header><div class="hero">
-<h2>Crée. Filme. Gagne.</h2>
-<p>Plateforme moderne pour vidéastes & créateurs</p>
-</div><section>
-<h2>🎬 200 fonctionnalités</h2>
+<button onclick="logout()">Déconnexion</button>
+</div>
+</header><section>
+<h2 style="padding:20px">🎬 Fonctionnalités</h2>
 <div class="grid" id="features"></div>
-</section><section>
-<h2>📸 Services</h2>
-<div class="grid">
-<div class="card">Tournage</div>
-<div class="card">Montage</div>
-<div class="card">Drone</div>
-<div class="card">Publicité</div>
-</div>
-</section><section>
-<h2>📊 Tableau de bord</h2>
-<div class="grid">
-<div class="card">Mes projets</div>
-<div class="card">Mes revenus</div>
-<div class="card">Statistiques</div>
-</div>
-</section><footer>
-<p>© 2026 Vidéaste Pro+</p>
-</footer><!-- MODALS --><div id="login" class="modal">
+</section><div id="login" class="modal">
 <div class="modal-content">
 <h3>Connexion</h3>
-<input type="email" placeholder="Email">
-<input type="password" placeholder="Mot de passe">
+<input type="email" id="loginEmail" placeholder="Email">
+<input type="password" id="loginPassword" placeholder="Mot de passe">
 <button onclick="login()">Se connecter</button>
 </div>
 </div><div id="register" class="modal">
 <div class="modal-content">
 <h3>Créer un compte</h3>
-<input type="text" placeholder="Nom">
-<input type="email" placeholder="Email">
-<input type="password" placeholder="Mot de passe">
+<input type="email" id="regEmail" placeholder="Email">
+<input type="password" id="regPassword" placeholder="Mot de passe">
 <button onclick="register()">Créer</button>
 </div>
 </div><script>
+// Firebase config (REMPLACE avec ton config Firebase)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+function register(){
+ let email=document.getElementById('regEmail').value;
+ let password=document.getElementById('regPassword').value;
+ auth.createUserWithEmailAndPassword(email,password)
+ .then(()=>alert('Compte créé'))
+ .catch(err=>alert(err.message));
+}
+
+function login(){
+ let email=document.getElementById('loginEmail').value;
+ let password=document.getElementById('loginPassword').value;
+ auth.signInWithEmailAndPassword(email,password)
+ .then(()=>alert('Connecté'))
+ .catch(err=>alert(err.message));
+}
+
+function logout(){
+ auth.signOut();
+ alert('Déconnecté');
+}
+
+function openModal(id){document.getElementById(id).style.display='flex'}
+window.onclick=e=>{document.querySelectorAll('.modal').forEach(m=>{if(e.target==m)m.style.display='none'})}
+
 // Générer 200 blocs
 let container=document.getElementById('features');
 for(let i=1;i<=200;i++){
@@ -79,11 +85,5 @@ for(let i=1;i<=200;i++){
  div.innerText='Fonction '+i;
  container.appendChild(div);
 }
-
-function openModal(id){document.getElementById(id).style.display='flex'}
-window.onclick=function(e){document.querySelectorAll('.modal').forEach(m=>{if(e.target==m)m.style.display='none'})}
-
-function login(){alert('Connexion simulée (backend à connecter)')}
-function register(){alert('Compte créé (simulation)')}
 </script></body>
 </html>
