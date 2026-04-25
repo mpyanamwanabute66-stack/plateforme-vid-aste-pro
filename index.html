@@ -8,12 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Poppins;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
 
 body{
   background: radial-gradient(circle at top, #0f172a, #020617);
@@ -29,16 +24,15 @@ header{
   padding:20px;
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(10px);
-  position:sticky;
-  top:0;
   border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 header h1{
-  font-size:20px;
   color:#38bdf8;
+  font-size:20px;
 }
 
+/* BUTTON */
 button{
   padding:10px 15px;
   border:none;
@@ -62,7 +56,6 @@ button:hover{
 
 .hero h2{
   font-size:28px;
-  margin-bottom:10px;
 }
 
 .hero p{
@@ -84,29 +77,13 @@ button:hover{
   border-radius:15px;
   padding:20px;
   text-align:center;
-  transition:0.3s;
   backdrop-filter:blur(10px);
-  animation:fadeIn 0.5s ease-in-out;
+  transition:0.3s;
 }
 
 .card:hover{
   transform:translateY(-5px);
   background:rgba(56,189,248,0.1);
-  box-shadow:0 0 20px rgba(56,189,248,0.3);
-}
-
-/* ANIMATION */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  color:#64748b;
-  margin-top:20px;
 }
 </style>
 </head>
@@ -115,38 +92,44 @@ footer{
 
 <header>
 <h1>🎬 Vidéaste Pro+</h1>
-<button onclick="alert('Mode démo actif')">Menu</button>
+<button onclick="alert('Menu bientôt disponible')">Menu</button>
 </header>
 
 <section class="hero">
 <h2>Plateforme Vidéaste Moderne</h2>
-<p>Création, montage, services et outils professionnels</p>
+<p>Services professionnels de création vidéo</p>
 </section>
 
 <section class="grid" id="grid"></section>
 
-<footer>
-© 2026 Vidéaste Pro+ | Version moderne sans backend
-</footer>
+<script>
+const grid = document.getElementById("grid");
 
-<const grid = document.getElementById("grid");
+/* Charger JSON */
+fetch("./data.json")
+.then(res => res.json())
+.then(data => {
+  data.forEach(item => {
+    let card = document.createElement("div");
+    card.className = "card";
 
-for (let i = 1; i <= 200; i++) {
-  let card = document.createElement("div");
-  card.className = "card";
+    card.innerHTML = `
+      <h3>${item.titre}</h3>
+      <p style="color:#94a3b8;font-size:13px;margin-top:8px;">
+        ${item.description}
+      </p>
+      <button style="margin-top:10px;" onclick="alert('Ouvert')">
+        Voir
+      </button>
+    `;
 
-  card.innerHTML = `
-    <h3>Service ${i}</h3>
-    <p style="color:#94a3b8;font-size:13px;margin-top:5px;">
-      Outil professionnel de création vidéo
-    </p>
-    <button style="margin-top:10px;" onclick="alert('Service ${i} bientôt disponible 🚀')">
-      Ouvrir
-    </button>
-  `;
-
-  grid.appendChild(card);
-}
+    grid.appendChild(card);
+  });
+})
+.catch(err => {
+  grid.innerHTML = "<p>Erreur de chargement des données</p>";
+});
+</script>
 
 </body>
 </html>
