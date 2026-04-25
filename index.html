@@ -16,7 +16,29 @@ button{padding:10px;border:none;border-radius:8px;background:#38bdf8;cursor:poin
 .modal-content{background:#1e293b;padding:20px;border-radius:10px}
 .modal input{display:block;margin:10px 0;padding:10px;width:100%}
 </style>
-</head>
+</head><script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCWNWmvWk8Kt368i9o1miiz4HnDuanlIP4",
+    authDomain: "plateforme-72a46.firebaseapp.com",
+    projectId: "plateforme-72a46",
+    storageBucket: "plateforme-72a46.firebasestorage.app",
+    messagingSenderId: "930622330562",
+    appId: "1:930622330562:web:60f48a5dd8f352169d8d5b",
+    measurementId: "G-S60Z1V7LYF"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 <body>
 <header>
 <h1>Vidéaste Pro+</h1>
