@@ -2,80 +2,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plateforme Vidéaste Pro</title>
+<title>Vidéaste Pro+</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#0f172a;color:white}
-header{background:#020617;padding:20px;text-align:center}
-section{padding:40px;border-bottom:1px solid #1e293b}
-h2{color:#38bdf8}
+:root{--bg:#0f172a;--card:#1e293b;--accent:#38bdf8;--text:#e2e8f0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text)}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px;background:#020617;position:sticky;top:0}
+header h1{color:var(--accent)}
+nav button{margin-left:10px;padding:10px 15px;border:none;border-radius:8px;background:var(--accent);color:#000;cursor:pointer}
+.hero{padding:60px;text-align:center;background:linear-gradient(135deg,#020617,#1e293b)}
+.hero h2{font-size:2rem;margin-bottom:10px}
+section{padding:40px}
+h2{color:var(--accent);margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
-.card{background:#1e293b;padding:15px;border-radius:10px}
-footer{background:#020617;text-align:center;padding:20px}
+.card{background:var(--card);padding:20px;border-radius:15px;transition:.3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,.5)}
+footer{text-align:center;padding:20px;background:#020617}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);justify-content:center;align-items:center}
+.modal-content{background:#1e293b;padding:30px;border-radius:10px;width:300px}
+.modal input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:5px}
+.modal button{width:100%;padding:10px;background:var(--accent);border:none;border-radius:5px}
 </style>
 </head>
 <body>
 <header>
-<h1>Plateforme Complète pour Vidéastes & Caméramans</h1>
-<p>Tout-en-un pour apprendre, créer, monétiser</p>
-</header><section>
-<h2>📸 Services principaux</h2>
+<h1>Vidéaste Pro+</h1>
+<nav>
+<button onclick="openModal('login')">Connexion</button>
+<button onclick="openModal('register')">Créer compte</button>
+</nav>
+</header><div class="hero">
+<h2>Crée. Filme. Gagne.</h2>
+<p>Plateforme moderne pour vidéastes & créateurs</p>
+</div><section>
+<h2>🎬 200 fonctionnalités</h2>
+<div class="grid" id="features"></div>
+</section><section>
+<h2>📸 Services</h2>
 <div class="grid">
-<div class="card">Tournage vidéo</div>
-<div class="card">Montage professionnel</div>
-<div class="card">Color grading</div>
-<div class="card">Drone vidéo</div>
+<div class="card">Tournage</div>
+<div class="card">Montage</div>
+<div class="card">Drone</div>
 <div class="card">Publicité</div>
-<div class="card">Clip musical</div>
-<div class="card">Mariage</div>
-<div class="card">Documentaire</div>
 </div>
 </section><section>
-<h2>🎬 200 fonctionnalités / sections</h2>
+<h2>📊 Tableau de bord</h2>
 <div class="grid">
-<script>
-let container = document.currentScript.parentElement;
-for(let i=1;i<=200;i++){
- let div=document.createElement("div");
- div.className="card";
- div.innerText="Fonctionnalité Vidéo #"+i;
- container.appendChild(div);
-}
-</script>
-</div>
-</section><section>
-<h2>📚 Formations</h2>
-<div class="grid">
-<div class="card">Apprendre la caméra</div>
-<div class="card">Maîtriser le montage</div>
-<div class="card">Effets spéciaux</div>
-<div class="card">YouTube & contenu</div>
-<div class="card">Cinéma professionnel</div>
-</div>
-</section><section>
-<h2>💼 Opportunités</h2>
-<div class="grid">
-<div class="card">Trouver clients</div>
-<div class="card">Freelance</div>
-<div class="card">Marketplace vidéo</div>
-<div class="card">Collaboration</div>
-</div>
-</section><section>
-<h2>🛠 Outils</h2>
-<div class="grid">
-<div class="card">Calcul budget</div>
-<div class="card">Planification tournage</div>
-<div class="card">Storyboard</div>
-<div class="card">Gestion projet</div>
-</div>
-</section><section>
-<h2>📱 Galerie</h2>
-<div class="grid">
-<div class="card">Portfolio vidéo</div>
-<div class="card">Photos</div>
-<div class="card">Clips</div>
-<div class="card">Behind the scenes</div>
+<div class="card">Mes projets</div>
+<div class="card">Mes revenus</div>
+<div class="card">Statistiques</div>
 </div>
 </section><footer>
-<p>© 2026 Plateforme Vidéaste Pro - Créé par toi 🚀</p>
-</footer></body>
+<p>© 2026 Vidéaste Pro+</p>
+</footer><!-- MODALS --><div id="login" class="modal">
+<div class="modal-content">
+<h3>Connexion</h3>
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Mot de passe">
+<button onclick="login()">Se connecter</button>
+</div>
+</div><div id="register" class="modal">
+<div class="modal-content">
+<h3>Créer un compte</h3>
+<input type="text" placeholder="Nom">
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Mot de passe">
+<button onclick="register()">Créer</button>
+</div>
+</div><script>
+// Générer 200 blocs
+let container=document.getElementById('features');
+for(let i=1;i<=200;i++){
+ let div=document.createElement('div');
+ div.className='card';
+ div.innerText='Fonction '+i;
+ container.appendChild(div);
+}
+
+function openModal(id){document.getElementById(id).style.display='flex'}
+window.onclick=function(e){document.querySelectorAll('.modal').forEach(m=>{if(e.target==m)m.style.display='none'})}
+
+function login(){alert('Connexion simulée (backend à connecter)')}
+function register(){alert('Compte créé (simulation)')}
+</script></body>
 </html>
