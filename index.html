@@ -129,28 +129,24 @@ footer{
 © 2026 Vidéaste Pro+ | Version moderne sans backend
 </footer>
 
-<script>
-// Génération de 200 blocs modernes
-const grid = document.getElementById("grid");
+<const grid = document.getElementById("grid");
 
-for(let i=1;i<=200;i++){
+for (let i = 1; i <= 200; i++) {
   let card = document.createElement("div");
   card.className = "card";
+
   card.innerHTML = `
     <h3>Service ${i}</h3>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
     <p style="color:#94a3b8;font-size:13px;margin-top:5px;">
       Outil professionnel de création vidéo
     </p>
-  const db = firebase.firestore();
     <button style="margin-top:10px;" onclick="alert('Service ${i} bientôt disponible 🚀')">
       Ouvrir
     </button>
   `;
+
   grid.appendChild(card);
 }
-</script>
 
 </body>
 </html>
